@@ -13,4 +13,4 @@ export default interface IMovie {
       vote_count: number;
       video: boolean;
       vote_average: number;
-}
+};

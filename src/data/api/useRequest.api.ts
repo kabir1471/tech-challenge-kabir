@@ -16,7 +16,7 @@ const STATUS_SUCCESS = 200;
 const getCacheKey = (key: string, ...params:any): string => key.format(params);
 
 export const useRequest = <T>(request: (...params: any) =>
-	Promise<IApiResponse<T>>, options: Options) => {
+	Promise<IApiResponse<T>>, options?: Options) => {
 	const { addToCache, getFromCache } = useCache();
 	const mOptions = { ...defaultOptions, ...options };
 	const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ export const useRequest = <T>(request: (...params: any) =>
 			const cache = getFromCache(cacheKey);
 			if (cache) {
 				const resp = cache as IApiResponse<T>;
-				setData(resp.data);
+				setData(resp.results);
 				setError(resp.statusCode !== STATUS_SUCCESS);
 				setLoading(false);
 				return resp.statusCode !== STATUS_SUCCESS;
@@ -49,7 +49,7 @@ export const useRequest = <T>(request: (...params: any) =>
 			if (enableCache) {
 				addToCache(cacheKey, response);
 			}
-			setData(response.data);
+			setData(response.results);
 			setError(response.statusCode !== STATUS_SUCCESS);
 			return response.statusCode !== STATUS_SUCCESS;
 		} catch (err) {

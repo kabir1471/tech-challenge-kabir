@@ -1,25 +1,14 @@
 import React from 'react';
+import { ListMovies } from './components/pages';
+import { CacheProvider } from './providers';
+import {} from './utils/string.extension';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './app.css';
 
 const App = () => (
-	<div className="App">
-		<header className="App-header">
-			<p>
-				Edit
-				{' '}
-				<code>src/App.tsx</code>
-				{' '}
-				and save to reload.
-			</p>
-			<a
-				className="App-link"
-				href="https://reactjs.org"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				Learn React
-			</a>
-		</header>
-	</div>
+	<CacheProvider>
+		<ListMovies />
+	</CacheProvider>
 );
 
 export default App;
